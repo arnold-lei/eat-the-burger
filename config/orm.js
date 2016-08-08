@@ -11,19 +11,15 @@ var connection = require('../config/connection.js');
 
 
 var orm = {
-    selectAll: function(){
-            
+    selectAll: function(tableName, cb){
+        var queryString = 'SELECT * FROM ' + tableName + ';';
+        connection.query(queryString, function(err, result) {
+            if (err) throw err;
+            cb(results)
+        })
     },
-	all: function (tableInput, cb) {
-		var queryString = 'SELECT * FROM ' + tableInput + ';';
-		connection.query(queryString, function (err, result) {
-			if (err) throw err;
-			cb(result);
-		});
-	},
-		// vals is an array of values that we want to save to cols
-		// cols are the columns we want to insert the values into
-	create: function (table, cols, vals, cb) {
+    // INSERT INTO burgers (burger_name, devoured) VALUES ('Black Bean Burger', false);
+	insertOne: function (table, cols, vals, cb) {
 		var queryString = 'INSERT INTO ' + table;
 
 		queryString = queryString + ' (';
@@ -42,7 +38,7 @@ var orm = {
 	},
 		// objColVals would be the columns and values that you want to update
 		// an example of objColVals would be {name: panther, sleepy: true}
-	update: function (table, objColVals, condition, cb) {
+	updateOne: function (table, objColVals, condition, cb) {
 		var queryString = 'UPDATE ' + table;
 
 		queryString = queryString + ' SET ';
