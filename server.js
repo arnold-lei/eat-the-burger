@@ -12,8 +12,6 @@ var orm             = require('./config/orm');
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
-
-
 //ROUTES!!!!!!
 app.get('/', function(req, res){
     connection.query('SELECT * FROM burgers;', function(err,rows, data){
