@@ -14,13 +14,22 @@ app.set('view engine', 'handlebars');
 
 //ROUTES!!!!!!
 app.get('/', function(req, res){
-    connection.query('SELECT * FROM burgers;', function(err,rows, data){
+    var rows;
+    connection.query('SELECT * FROM burgers WHERE devoured = false;', function(err, burgers, data){
+        rows = burgers
         res.render('index', {rows: rows});
     })
 });
 
+app.post('/post_burger', function(req, res){
+        connection.query('INSERT INTO burgers (burger_name, devoured) VALUES ('+params.body.order +', false)', function(err, data){
+            if (err) throw err;
+            res.redirect('/')
+        })
+});
+
 app.get('/api', function(req, res){
-    connection.query('SELECT * FROM burgers;', function(err, data){
+    connection.query('SELECT * FROM burgers WHERE devoured = false;', function(err, data){
         if (err) throw err;
         res.send(data);
     })

@@ -6,9 +6,11 @@
             <button class="btn btn-default" type="button">Order!</button>
           </span>
     </div>
-    {{#each rows}}
-        <ul>
-            <li>{{this.id}}. {{this.burger_name}} <button class="btn btn-default">Eat!</button></li>
-        </ul>
-    {{/each}}
+    <div class="col-md-3 container-fluid">
+        {{#each rows}}
+            <ul>
+                <li>{{this.id}}. {{this.burger_name}} <button class="btn btn-default pull-right">Eat!</button></li><br/>
+            </ul>
+        {{/each}}
+    </div>
 </div>
